@@ -47,8 +47,8 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
-        margin: auto;
+        width: 98%;
+        // margin: auto;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -156,6 +156,7 @@
         }
       }
       @media screen and (max-width: 900px) {
+        width: 98%;
         padding: 0.6rem 0.4rem;
         margin: auto;
       }
@@ -209,6 +210,7 @@
       grid-column-gap: 15px;
 
       .form_group {
+        width: 98%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -293,6 +295,7 @@
         padding: 0.6rem 0.4rem;
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -342,7 +345,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -434,6 +437,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -483,7 +487,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -575,6 +579,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -624,7 +629,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -716,6 +721,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -766,7 +772,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -857,6 +863,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -907,7 +914,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -977,6 +984,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
@@ -1027,7 +1035,7 @@
       grid-column-gap: 15px;
 
       .form_group {
-        width: 100%;
+        width: 98%;
         // margin: auto;
         display: flex;
         align-items: flex-start;
@@ -1119,6 +1127,7 @@
       @media screen and (max-width: 900px) {
         padding: 0.6rem 0.4rem;
         margin: auto;
+        width: 98%;
       }
     }
 
