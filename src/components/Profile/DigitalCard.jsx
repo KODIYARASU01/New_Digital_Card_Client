@@ -87,7 +87,7 @@ const DigitalCard = () => {
   return (
     <>
       <div className="digitalcard_container">
-        <div className="card_box">
+        <div className="card_box" style={{border:"2px solid white"}}>
           {/* First */}
           <div className="basic_details">
             <div className="banner_image">
