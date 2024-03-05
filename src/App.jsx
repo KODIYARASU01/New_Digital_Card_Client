@@ -1,20 +1,26 @@
 import "./App.css";
 
-// import Profile from './components/Profile/Profile';
-// import Register from "./components/Register";
-// import Reset from "./components/Reset";
-// import Recovery from "./components/Recovery";
-// import Password from "./components/Password";
+import Profile from "./components/Profile/Profile";
+import Register from "./components/Register";
+import Reset from "./components/Reset";
+import Recovery from "./components/Recovery";
+import Password from "./components/Password";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import Login from "./components/Login";
-// import UserProfile from "./components/Profile/Profile";
-// import Sidebar from "./components/Profile/Sidebar";
-// import DigitalCard from "./components/Profile/DigitalCard";
+import Login from "./components/Login";
+import UserProfile from "./components/Profile/Profile";
+import Sidebar from "./components/Profile/Sidebar";
+import DigitalCard from "./components/Profile/DigitalCard";
 import DigitalCard2 from "./components/Profile/DigitalCard2";
+import DigitalCard3 from "./components/Profile/DigitalCard3";
+import NewCard from "./components/Profile/NewCard";
 let router = createBrowserRouter([
   // {
   //   path: "/",
-  //   element: <Login />,
+  //   element: (
+  //     <Login
+
+  //     />
+  //   ),
   // },
   // {
   //   path: "/register",
@@ -49,15 +55,27 @@ let router = createBrowserRouter([
   //   path: "/digitalCard",
   //   element: <DigitalCard />,
   // },
+  // {
+  //   path: "/digitalCard2",
+  //   element: <DigitalCard2 />,
+  // },
+  // {
+  //   path: "/digitalCard3",
+  //   element: <DigitalCard3/>,
+  // },
   {
     path: "/",
-    element: <DigitalCard2 />,
-  }
+    element: <NewCard/>,
+  },
 ]);
 const App = () => {
+
   return (
     <main>
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider
+        router={router}
+
+      ></RouterProvider>
     </main>
   );
 };

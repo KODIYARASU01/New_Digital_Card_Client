@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Form.scss";
 import user from "../../assets/Social Medias/user1.gif";
 import background from "../../assets/banner.jpg";
@@ -32,6 +32,7 @@ let Forms = ({
   testimonialForm,
   //Basic
   banner,
+  // bannerRef,
   logo,
   fullName,
   profession,
@@ -111,9 +112,9 @@ let Forms = ({
   let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
   let [TestimonialData, setTestimonialData] = useState([]);
   let [TestimonialEdit, setTestimonialEdit] = useState(false);
+  let bannerRef = useRef();
+  let url = import.meta.env.SERVER_LISTENING;
 
-  let url=import.meta.env.SERVER_LISTENING;
-  
   let [loader, setLoader] = useState(false);
   //Fetch while cliking edit button:
   function handleEdit1() {
@@ -193,13 +194,13 @@ let Forms = ({
         setServiceEdit(true);
       })
       .catch((err) => {
-        alert(err.message)
-        setLoader(false)
+        alert(err.message);
+        setLoader(false);
       });
   }
   //Fetch while cliking Product Button:
   function handleEdit4() {
-    setLoader(true)
+    setLoader(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -215,16 +216,16 @@ let Forms = ({
         setProductSummary(res.data.getProductDetail[0].productSummary);
         setProductData(res.data.getProductDetail[0]);
         setProductEdit(true);
-        setLoader(false)
+        setLoader(false);
       })
       .catch((err) => {
-    alert(err.message)
-    setLoader(false)
+        alert(err.message);
+        setLoader(false);
       });
   }
   //Fetch while cliking Gallery Button:
   function handleEdit5() {
-    setLoader(true)
+    setLoader(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -238,16 +239,16 @@ let Forms = ({
         setVideoURL(res.data.getGalleryDetail[0].videoURL);
         setGalleryData(res.data.getGalleryDetail[0]);
         setGalleryEdit(true);
-        setLoader(false)
+        setLoader(false);
       })
       .catch((err) => {
-     alert(err.message)
-     setLoader(false)
+        alert(err.message);
+        setLoader(false);
       });
   }
   //Fetch while cliking SocialMedia Button:
   function handleEdit6() {
-    setLoader(false)
+    setLoader(false);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -264,16 +265,16 @@ let Forms = ({
         setTwiter(res.data.getSocialMediaDetail[0].Twiter);
         setSocialMediaData(res.data.getSocialMediaDetail[0]);
         setSocialMediaEdit(true);
-        setLoader(false)
+        setLoader(false);
       })
       .catch((err) => {
-        alert(err.message)
-        setLoader(false)
+        alert(err.message);
+        setLoader(false);
       });
   }
   //Fetch while cliking Product Button:
   function handleEdit7() {
-    setLoader(true)
+    setLoader(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -291,13 +292,17 @@ let Forms = ({
         setClientFeedback(res.data.getTestimonialDetail[0].clientFeedback);
         setTestimonialData(res.data.getTestimonialDetail[0]);
         setTestimonialEdit(true);
-        setLoader(false)
+        setLoader(false);
       })
       .catch((err) => {
-     alert(err.message)
-     setLoader(false)
+        alert(err.message);
+        setLoader(false);
       });
   }
+
+  const UploadBannerImage = () => {
+    setBanner(bannerRef.current.files[0]);
+  };
   //Formik does not support file upload so we could create handler :
   const onUploadBannerImage = async (e) => {
     let base64 = await convertBannerImageToBase64(e.target.files[0]);
@@ -339,39 +344,45 @@ let Forms = ({
   async function handleBasicFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      let bannerData = new FormData();
+      bannerData.append("banner", banner);
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
-        banner,
+        bannerData,
         logo,
         fullName,
         profession,
         summary,
       };
       // Make authenticated request with bearer token
-      await axios.post("https://new-digitalcard-server.onrender.com/basic_detail", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.post(
+        "https://new-digitalcard-server.onrender.com/basic_detail",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       alert("Form Submited Sucessfully");
-   
-      setFullName('');
+
+      setFullName("");
       setProfession("");
-      setSummary("")
-      setLoader(false)
+      setSummary("");
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Home form Edit:
   async function handleBasicFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -383,11 +394,15 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/basic_detail/${BasicData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://new-digitalcard-server.onrender.com/basic_detail/${BasicData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -395,22 +410,22 @@ let Forms = ({
           alert("Something error" + err.message);
         });
       alert("Form Updated Sucessfully");
- 
-      setFullName('');
+
+      setFullName("");
       setProfession("");
-      setSummary("")
-      setLoader(false)
+      setSummary("");
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Contact form submit:
   async function handleContactFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Contactdata = {
@@ -423,32 +438,36 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/contact_detail", Contactdata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/contact_detail",
+          Contactdata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
-          
-          setLoader(false)
+
+          setLoader(false);
         })
         .catch((error) => {
           alert("Data posting error" + error.message);
-          setLoader(false)
+          setLoader(false);
         });
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Contact form Edit:
   async function handleContactFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -461,31 +480,35 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/contact_detail/${ContactData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://new-digitalcard-server.onrender.com/contact_detail/${ContactData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
         .catch((err) => {
           alert("Something error" + err.message);
-          setLoader(false)
+          setLoader(false);
         });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Service form submit:
   async function handleServiceFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Servicedata = {
@@ -495,31 +518,35 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/service_detail", Servicedata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/service_detail",
+          Servicedata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
-          setLoader(false)
+          setLoader(false);
         })
         .catch((error) => {
           alert("Data posting error" + error.message);
-          setLoader(false)
+          setLoader(false);
         });
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Service form Edit:
   async function handleServiceFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -529,11 +556,15 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/service_detail/${ServiceData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://new-digitalcard-server.onrender.com/service_detail/${ServiceData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -541,18 +572,18 @@ let Forms = ({
           alert("Something error" + err.message);
         });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Product form submit:
   async function handleProductFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Productdata = {
@@ -563,31 +594,35 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/product_detail", Productdata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/product_detail",
+          Productdata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
-          setLoader(false)
+          setLoader(false);
         })
         .catch((error) => {
           alert("Data posting error" + error.message);
-          setLoader(false)
+          setLoader(false);
         });
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Product form Edit:
   async function handleProductEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -598,11 +633,15 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/product_detail/${ProductData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://new-digitalcard-server.onrender.com/product_detail/${ProductData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
         })
@@ -610,18 +649,18 @@ let Forms = ({
           alert("Something error" + err.message);
         });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Gallery form submit:
   async function handleGalleryFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Gallerydata = {
@@ -630,32 +669,36 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/gallery_detail", Gallerydata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/gallery_detail",
+          Gallerydata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
-          setLoader(false)
+          setLoader(false);
         })
         .catch((error) => {
           alert("Data posting error" + error.message);
-          setLoader(false)
+          setLoader(false);
         });
-        setLoader(false);
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Gallery form Edit:
   async function handleGalleryEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -664,32 +707,36 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/gallery_detail/${GalleryData._id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .put(
+          `https://new-digitalcard-server.onrender.com/gallery_detail/${GalleryData._id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
-          setLoader(false)
+          setLoader(false);
         })
         .catch((err) => {
           alert("Something error" + err.message);
-          setLoader(false)
+          setLoader(false);
         });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //SocialMedia form submit:
   async function handleSocialMediaFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(false)
+      setLoader(false);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let SocialMediadata = {
@@ -701,31 +748,35 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/socialMedia_detail", SocialMediadata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/socialMedia_detail",
+          SocialMediadata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
-          setLoader(false)
+          setLoader(false);
         })
         .catch((error) => {
           alert("Data posting error" + error.message);
         });
-        setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //SocialMedia form Edit:
   async function handleSocialMediaFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -753,18 +804,18 @@ let Forms = ({
           alert("Something error" + err.message);
         });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Testimonial form submit:
   async function handleTestimonialFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let SocialMediadata = {
@@ -775,11 +826,15 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/testimonial_detail", SocialMediadata, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        .post(
+          "https://new-digitalcard-server.onrender.com/testimonial_detail",
+          SocialMediadata,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
         .then((res) => {
           console.log(res);
           alert("Form Submited Sucessfully");
@@ -787,18 +842,18 @@ let Forms = ({
         .catch((error) => {
           alert("Data posting error" + error.message);
         });
-        setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false)
+      setLoader(false);
     }
   }
   //Testimonial form Edit:
   async function handleTestimonialEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true)
+      setLoader(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -820,18 +875,17 @@ let Forms = ({
         )
         .then((res) => {
           console.log(res.data);
-        })
-        setLoader(false)
-        .catch((err) => {
-          alert("Something error" + err.message);
-          setLoader(false)
         });
+      setLoader(false).catch((err) => {
+        alert("Something error" + err.message);
+        setLoader(false);
+      });
       alert("Form Updated Sucessfully");
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false)
+      setLoader(false);
     }
   }
   return (
@@ -867,10 +921,10 @@ let Forms = ({
                   Upload Banner Image
                   <img
                     className="banner"
-                    src={banner !== undefined ? banner : background}
+                    src={banner != undefined ? banner : background}
                     alt=""
                     name="bannerImage"
-                    onChange={onUploadBannerImage}
+                    onChange={UploadBannerImage}
                   />
                   <img
                     src={upload}
@@ -881,7 +935,8 @@ let Forms = ({
                 </label>
 
                 <input
-                  onChange={onUploadBannerImage}
+                  ref={bannerRef}
+                  onChange={UploadBannerImage}
                   type="file"
                   name="bannerImage"
                   id="bannerImage"

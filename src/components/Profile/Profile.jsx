@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect, useRef } from "react";
 import "./Profile.scss";
+import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Forms from "./Forms";
-
+import axios from 'axios'
 
 const UserProfile = () => {
+  let {id}=useParams();
   let [slideClose, setSlideShow] = useState(false);
   let [basicForm, setBasicForm] = useState(true);
   let [contactForm, setContactForm] = useState(false);
@@ -16,6 +18,7 @@ const UserProfile = () => {
 
     //Basic Detail form states:
 let[banner,setBanner]=useState();
+let bannerRef=useRef();
 let[logo,setLogo]=useState();
 let[fullName,setFullName]=useState();
 let[profession,setProfession]=useState();
@@ -60,6 +63,25 @@ let[clientName,setClientName]=useState();
 let[clientFeedbackDate,setClientFeedbackDate]=useState();
 let[clientFeedback,setClientFeedback]=useState();
 
+
+useEffect(() => {
+  let getLoginUserData = () => {
+    try {
+      axios
+        .get(`http://localhost:3000/login/${id}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    } catch (err) {
+      alert("Login data not found");
+    }
+  };
+
+  getLoginUserData();
+}, []);
   return (
     <div>
       <>
@@ -103,6 +125,7 @@ let[clientFeedback,setClientFeedback]=useState();
             setSocialMediaForm={setSocialMediaForm}
             setTestimonialForm={setTestimonialForm}
             banner={banner}
+            bannerRef={bannerRef}
             logo={logo}
             fullName={fullName}
             profession={profession}

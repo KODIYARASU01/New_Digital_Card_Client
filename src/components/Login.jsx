@@ -8,8 +8,9 @@ import svg from "../assets/svg/6.svg";
 import Loader from "../components/Loader.jsx";
 
 export default function Login() {
+  var [loginUserData, setLoginUserData] = useState("Hello");
   let navigate = useNavigate();
-
+  console.log(loginUserData);
   let [userName, setUserName] = useState();
   let [password, setpassword] = useState();
   let [loader, setLoader] = useState(false);
@@ -36,7 +37,7 @@ export default function Login() {
       setLoader(false);
     } catch (error) {
       console.log("User not login" + error.message);
-      alert("User not Registered" + error.message)
+      alert("User not Registered" + error.message);
       setLoader(false);
       navigate("/");
     }
@@ -44,7 +45,7 @@ export default function Login() {
 
   return (
     <div className="user_container">
-         <div className="loader_anime">
+      <div className="loader_anime">
         {loader ? <span className="loader"></span> : ""}
       </div>
       {/* <div className="svg">

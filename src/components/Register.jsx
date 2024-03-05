@@ -3,11 +3,11 @@ import { Link, useNavigate } from "react-router-dom";
 import avator from "../assets/profile.png";
 import company from "../assets/aristostech.jpg";
 import { useState } from "react";
-import { registerValidate } from "./helper/registerValidate";
-// import useFormik from "formik";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { convertToBase64 } from "./helper/convert.js";
 import axios from "axios";
-import { Audio } from "react-loader-spinner";
+
 export default function Register() {
   let navigate = useNavigate();
   //Image store state :
@@ -16,54 +16,42 @@ export default function Register() {
   let [email, setEmail] = useState();
   let [password, setPassword] = useState();
   let [loader, setLoader] = useState(false);
+console.log(userName)
   let handleRegister = async (e) => {
     e.preventDefault();
-
-    // let { userName, password, email } = req.body;
-
     try {
-      let data = { userName, email, password, profile };
-      setLoader(true);
-      let result = await axios.post("https://new-digitalcard-server.onrender.com/api/register", data);
-      console.log(result);
-      if (result) {
-        console.log("User Registerd Sucessfully" + result);
+      if (
+        userName === '' ||
+        email === '' ||
+        password === ''
+      ) {
+        toast.warning("Make sure to Fill All required Fields : UserName,Email,Password");
         setLoader(false);
-        navigate("/");
       } else {
-        navigate("/register");
-        setLoader(false);
+        let data = { userName, email, password, profile };
+        setLoader(true);
+        let result = await axios.post(
+          "https://new-digitalcard-server.onrender.com/api/register",
+          data
+        );
+
+        if (result) {
+          toast.success(result.data.message);
+          setLoader(false);
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
+        } else {
+          navigate("/register");
+          setLoader(false);
+        }
       }
     } catch (error) {
       setLoader(false);
-      alert("Something Error " + error.message);
-      console.log("User not registered" + error.message);
+      toast.error(error.response.data.message);
     }
   };
-  // //Formik for form validation:
-  // let formik = useFormik({
-  //   initialValues: {
-  //     email: "",
-  //     username: "",
-  //     password: "",
-  //   },
-  //   validateOnBlur: false,
-  //   validateOnChange: false,
-  //   validate: registerValidate,
-  //   onSubmit: async (values) => {
-  //     values = await Object.assign(values, { profile: file || "" });
-  //     let registerPromise = registerUser(values);
-  //     toast.promise(registerPromise, {
-  //       loading: "Creating....",
-  //       success: <b>Registered Successfully...!</b>,
-  //       error: <b>Could not Register.</b>,
-  //     });
 
-  //     registerPromise.then(function () {
-  //       navigate("/");
-  //     });
-  //   },
-  // });
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64(e.target.files[0]);
@@ -73,6 +61,19 @@ export default function Register() {
 
   return (
     <div className="user_container">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
       <div className="loader_anime">
         {loader ? <span className="loader"></span> : ""}
       </div>
