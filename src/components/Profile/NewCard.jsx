@@ -32,11 +32,11 @@ import wordpress from "../../assets/service/wordpress.gif";
 
 const NewCard = () => {
   const buttonStyle = {
-    width: "20px",
+    width: "0px",
     background: "none",
     opacity:0,
     border: "0px",
-    padding: "10px",
+    padding: "0px",
   };
   const buttonStyle2 = {
     width: "30px",
