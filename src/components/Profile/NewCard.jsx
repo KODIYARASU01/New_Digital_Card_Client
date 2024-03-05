@@ -34,6 +34,7 @@ const NewCard = () => {
   const buttonStyle = {
     width: "20px",
     background: "none",
+    opacity:0,
     border: "0px",
     padding: "10px",
   };
