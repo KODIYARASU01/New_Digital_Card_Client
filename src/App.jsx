@@ -13,6 +13,7 @@ import DigitalCard from "./components/Profile/DigitalCard";
 import DigitalCard2 from "./components/Profile/DigitalCard2";
 import DigitalCard3 from "./components/Profile/DigitalCard3";
 import NewCard from "./components/Profile/NewCard";
+import NewCard2 from "./components/Profile/NewCard2";
 let router = createBrowserRouter([
   // {
   //   path: "/",
@@ -63,9 +64,13 @@ let router = createBrowserRouter([
   //   path: "/digitalCard3",
   //   element: <DigitalCard3/>,
   // },
+  // {
+  //   path: "/newCard",
+  //   element: <NewCard/>,
+  // },
   {
     path: "/",
-    element: <NewCard/>,
+    element: <NewCard2/>,
   },
 ]);
 const App = () => {

@@ -6,45 +6,75 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import svg from "../assets/svg/6.svg";
 import Loader from "../components/Loader.jsx";
-
+import threeD from '../assets/Background/3d-rendering-cartoon-like-man-working-computer.jpg'
+import { ToastContainer, toast } from "react-toastify";
 export default function Login() {
   var [loginUserData, setLoginUserData] = useState("Hello");
   let navigate = useNavigate();
   console.log(loginUserData);
-  let [userName, setUserName] = useState();
-  let [password, setpassword] = useState();
+  let [userName, setUserName] = useState('');
+  let [password, setpassword] = useState('');
   let [loader, setLoader] = useState(false);
 
   let handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      let data = { userName, password };
-      setLoader(true);
-      let result = await axios.post(
-        "https://new-digitalcard-server.onrender.com/api/login",
-        data
-      );
+      if(userName ==='' || password ===''){
+        toast.warning('Pls Make sure to fill all required fields ')
+      }
+      else{
 
-      let { token } = result.data;
+        let data = { userName, password };
+        setLoader(true);
+        let result = await axios.post(
+          "http://localhost:3000/api/login",
+          data
+        );
+  
+        let { token } = result.data;
+  
+  
+        // Store the token in local storage
+        localStorage.setItem("token", token);
+        toast.success(result.data.message);
+        setTimeout(()=>{
+          navigate("/user_admin");
+        },3000)
+        setUserName("");
+        setpassword("");
+        setLoader(false);
+      }
 
-      console.log(token);
-      // Store the token in local storage
-      localStorage.setItem("token", token);
-      navigate("/user_admin");
-      setUserName("");
-      setpassword("");
-      setLoader(false);
     } catch (error) {
-      console.log("User not login" + error.message);
-      alert("User not Registered" + error.message);
+      toast.error(error.response.data.message)
       setLoader(false);
+      setUserName('');
+      setpassword('')
       navigate("/");
     }
   };
 
   return (
     <div className="user_container">
+
+      {/* Toast notification */}
+           <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
+         <div className="threedImage">
+        <img src={threeD} alt="d" />
+      </div>
       <div className="loader_anime">
         {loader ? <span className="loader"></span> : ""}
       </div>

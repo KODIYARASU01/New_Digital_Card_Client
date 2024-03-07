@@ -2,6 +2,7 @@ import "./styles/User.scss";
 import { Link, useNavigate } from "react-router-dom";
 import avator from "../assets/profile.png";
 import company from "../assets/aristostech.jpg";
+import threeD from '../assets/Background/3d-rendering-cartoon-like-man-working-computer.jpg'
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,9 +13,9 @@ export default function Register() {
   let navigate = useNavigate();
   //Image store state :
   let [profile, setProfile] = useState();
-  let [userName, setUserName] = useState();
-  let [email, setEmail] = useState();
-  let [password, setPassword] = useState();
+  let [userName, setUserName] = useState('');
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
   let [loader, setLoader] = useState(false);
 console.log(userName)
   let handleRegister = async (e) => {
@@ -31,7 +32,7 @@ console.log(userName)
         let data = { userName, email, password, profile };
         setLoader(true);
         let result = await axios.post(
-          "https://new-digitalcard-server.onrender.com/api/register",
+          "http://localhost:3000/api/register",
           data
         );
 
@@ -39,7 +40,7 @@ console.log(userName)
           toast.success(result.data.message);
           setLoader(false);
           setTimeout(() => {
-            navigate("/");
+            navigate("/user_admin");
           }, 3000);
         } else {
           navigate("/register");
@@ -74,6 +75,9 @@ console.log(userName)
         theme="light"
         transition:Bounce
       />
+      <div className="threedImage">
+        <img src={threeD} alt="d" />
+      </div>
       <div className="loader_anime">
         {loader ? <span className="loader"></span> : ""}
       </div>

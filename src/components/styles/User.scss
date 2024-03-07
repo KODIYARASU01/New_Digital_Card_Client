@@ -1,7 +1,7 @@
 .user_container {
   width: 100dvw;
   height: 100vh;
-  background-image: url("../../assets/Background/2.jpg");
+  background-image: url("../../assets/Background/21.jpg");
   //   background: #dcdce6;
   background-position: center;
   background-repeat: no-repeat;
@@ -43,6 +43,27 @@
     } 
   }
 
+  .threedImage{
+position: absolute;
+bottom: 0%;
+right: 0%;
+
+img{
+  width: 300px;
+  mix-blend-mode: multiply;
+
+  @media screen and (max-width:900px){
+  width: 150px;
+  mix-blend-mode: multiply;
+  }
+}
+
+@media screen and (max-width:900px){
+
+display: none;
+}
+  }
+
   .user_header {
     // position: absolute;
     // top: 30%;
@@ -60,7 +81,7 @@
       justify-content: center;
       margin: auto;
       font-size: 2rem;
-      color: #ffffff;
+      color: royalblue;
       font-weight: 600;
       letter-spacing: 1px;
       @media screen and (max-width: 900px) {
@@ -72,7 +93,7 @@
       font-size: 0.9rem;
       letter-spacing: 1px;
       padding: 0px 20px;
-      color: rgb(0, 0, 0);
+      color: rgb(31, 31, 32);
       text-align: center;
 
       @media screen and (max-width: 900px) {
@@ -98,10 +119,11 @@
     min-width: 28%;
     min-height: 70%;
     overflow-y: auto;
-    // background: rgba(255, 255, 255, 0.33);
-    // box-shadow: 0 8px 32px rgba(0, 0, 255, 0.35);
-    // backdrop-filter: blur(3px);
-    background: linear-gradient(#ffffff, #ffffff);
+    z-index: 600;
+    background: rgba(255, 255, 255, 0.33);
+    box-shadow: 0 8px 32px rgba(0, 0, 255, 0.35);
+    backdrop-filter: blur(3px);
+    // background: linear-gradient(#ffffff, #ffffff);
     margin: 10px;
     border-radius: 1rem;
 
@@ -573,6 +595,10 @@
       padding: 20px;
       border: 3px solid #ffffff;
     }
+  }
+
+  @media screen and (max-width:900px){
+    background-image: url("../../assets/Background/8.jpg");
   }
 }
 

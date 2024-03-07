@@ -214,7 +214,7 @@ const NewCard = () => {
 
             <Slide
               className="product_slide"
-              slidesToScroll={2}
+              slidesToScroll={1}
               slidesToShow={2}
               indicators={true}
               autoplay

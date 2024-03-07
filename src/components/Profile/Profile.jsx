@@ -17,8 +17,8 @@ const UserProfile = () => {
   let [testimonialForm, setTestimonialForm] = useState(false);
 
     //Basic Detail form states:
-let[banner,setBanner]=useState();
-let bannerRef=useRef();
+let[banner,setBanner]=useState('');
+let bannerRef=useRef(null);
 let[logo,setLogo]=useState();
 let[fullName,setFullName]=useState();
 let[profession,setProfession]=useState();
@@ -35,7 +35,8 @@ let[Address,setAddress]=useState();
 
 //Service etail form states:
 
-let[serviceImage,setServiceImage]=useState();
+let[serviceImage,setServiceImage]=useState('');
+console.log(serviceImage)
 let[serviceTitle,setServiceTitle]=useState();
 let[serviceSummary,setServiceSummary]=useState();
 
