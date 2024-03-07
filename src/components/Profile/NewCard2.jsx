@@ -1,6 +1,6 @@
 import React from "react";
 import "./NewCard2.scss";
-import banner from "../../assets/Background/17.jpg";
+import banner from "../../assets/Background/12.jpg";
 import avatar from "../../assets/avatar_2.jpeg";
 import logo from "../../assets/avatar_2.jpeg";
 import { Slide } from "react-slideshow-image";
