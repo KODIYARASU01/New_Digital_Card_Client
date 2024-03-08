@@ -9,7 +9,7 @@ import Loader from "../components/Loader.jsx";
 import threeD from '../assets/Background/3d-rendering-cartoon-like-man-working-computer.jpg'
 import { ToastContainer, toast } from "react-toastify";
 export default function Login() {
-  var [loginUserData, setLoginUserData] = useState("Hello");
+  var [loginUserData, setLoginUserData] = useState("");
   let navigate = useNavigate();
   console.log(loginUserData);
   let [userName, setUserName] = useState('');
@@ -34,7 +34,7 @@ export default function Login() {
   
         let { token } = result.data;
   
-  
+  console.log(token);
         // Store the token in local storage
         localStorage.setItem("token", token);
         toast.success(result.data.message);
