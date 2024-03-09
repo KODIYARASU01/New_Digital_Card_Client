@@ -15,61 +15,61 @@ import DigitalCard3 from "./components/Profile/DigitalCard3";
 import NewCard from "./components/Profile/NewCard";
 import NewCard2 from "./components/Profile/NewCard2";
 let router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: (
+  //     <Login
+
+  //     />
+  //   ),
+  // },
+  // {
+  //   path: "/register",
+  //   element: <Register />,
+  // },
+  // {
+  //   path: "/reset",
+  //   element: <Reset />,
+  // },
+  // {
+  //   path: "/recovery",
+  //   element: <Recovery />,
+  // },
+  // {
+  //   path: "/password",
+  //   element: <Password />,
+  // },
+
+  // {
+  //   path: "/profile",
+  //   element: <Profile />,
+  // },
+  // {
+  //   path: "/user_admin",
+  //   element: <UserProfile />,
+  // },
+  // {
+  //   path: "/sidebar",
+  //   element: <Sidebar />,
+  // },
+  // {
+  //   path: "/digitalCard",
+  //   element: <DigitalCard />,
+  // },
+  // {
+  //   path: "/digitalCard2",
+  //   element: <DigitalCard2 />,
+  // },
+  // {
+  //   path: "/digitalCard3",
+  //   element: <DigitalCard3/>,
+  // },
+  // {
+  //   path: "/newCard",
+  //   element: <NewCard/>,
+  // },
   {
     path: "/",
-    element: (
-      <Login
-
-      />
-    ),
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/reset",
-    element: <Reset />,
-  },
-  {
-    path: "/recovery",
-    element: <Recovery />,
-  },
-  {
-    path: "/password",
-    element: <Password />,
-  },
-
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/user_admin",
-    element: <UserProfile />,
-  },
-  {
-    path: "/sidebar",
-    element: <Sidebar />,
-  },
-  {
-    path: "/digitalCard",
-    element: <DigitalCard />,
-  },
-  {
-    path: "/digitalCard2",
-    element: <DigitalCard2 />,
-  },
-  {
-    path: "/digitalCard3",
-    element: <DigitalCard3/>,
-  },
-  {
-    path: "/newCard",
-    element: <NewCard/>,
-  },
-  {
-    path: "/newCard2",
     element: <NewCard2/>,
   },
 ]);

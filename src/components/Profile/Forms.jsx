@@ -301,8 +301,10 @@ let Forms = ({
       });
   }
 
-  const UploadBannerImage = () => {
-    setBanner(bannerRef.current.files[0]);
+  const onUploadBannerImage = async (e) => {
+    let base64 = await convertBannerImageToBase64(e.target.files[0]);
+
+    setBanner(base64);
   };
 
   //Formik does not support file upload so we could create handler :
@@ -312,16 +314,16 @@ let Forms = ({
     setLogo(base64);
   };
 
-  // //Formik does not support file upload so we could create handler :
-  // const onUploadServiceImage = async (e) => {
-  //   let base64 = await convertServiceImageToBase64(e.target.files[0]);
+  //Formik does not support file upload so we could create handler :
+  const onUploadServiceImage = async (e) => {
+    let base64 = await convertServiceImageToBase64(e.target.files[0]);
 
-  //   setServiceImage(base64);
-  // };
-
-  const onUploadServiceImage=(e)=>{
-    setServiceImage(e.target.files[0])
+    setServiceImage(base64);
   };
+
+  // const onUploadServiceImage=(e)=>{
+  //   setServiceImage(e.target.files[0])
+  // };
   //Formik does not support file upload so we could create handler :
   const onUploadProductImage = async (e) => {
     let base64 = await convertProductImageToBase64(e.target.files[0]);
@@ -892,7 +894,7 @@ let Forms = ({
 
                 <input
                   ref={bannerRef}
-                  onChange={UploadBannerImage}
+                  onChange={onUploadBannerImage}
                   type="file"
                   name="bannerImage"
                   id="bannerImage"
@@ -918,7 +920,7 @@ let Forms = ({
                 </label>
 
                 <input
-               
+               onChange={onUpload}
                   value={banner}
                   type="file"
                   name="logo"

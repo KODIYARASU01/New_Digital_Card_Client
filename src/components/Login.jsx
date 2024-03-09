@@ -6,60 +6,53 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import svg from "../assets/svg/6.svg";
 import Loader from "../components/Loader.jsx";
-import threeD from '../assets/Background/3d-rendering-cartoon-like-man-working-computer.jpg'
+import threeD from "../assets/Background/3d-rendering-cartoon-like-man-working-computer.jpg";
 import { ToastContainer, toast } from "react-toastify";
 export default function Login() {
   var [loginUserData, setLoginUserData] = useState("");
   let navigate = useNavigate();
   console.log(loginUserData);
-  let [userName, setUserName] = useState('');
-  let [password, setpassword] = useState('');
+  let [userName, setUserName] = useState("");
+  let [password, setpassword] = useState("");
   let [loader, setLoader] = useState(false);
 
   let handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      if(userName ==='' || password ===''){
-        toast.warning('Pls Make sure to fill all required fields ')
-      }
-      else{
-
+      if (userName === "" || password === "") {
+        toast.warning("Pls Make sure to fill all required fields ");
+      } else {
         let data = { userName, password };
         setLoader(true);
-        let result = await axios.post(
-          "http://localhost:3000/api/login",
-          data
-        );
-  
+        let result = await axios.post("http://localhost:3000/api/login", data);
+
         let { token } = result.data;
-  
-  console.log(token);
+
+        console.log(token);
         // Store the token in local storage
         localStorage.setItem("token", token);
         toast.success(result.data.message);
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate("/user_admin");
-        },3000)
+        }, 3000);
         setUserName("");
         setpassword("");
         setLoader(false);
       }
-
     } catch (error) {
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
       setLoader(false);
-      setUserName('');
-      setpassword('')
+      setUserName("");
+      setpassword("");
       navigate("/");
     }
   };
 
   return (
     <div className="user_container">
-
       {/* Toast notification */}
-           <ToastContainer
+      <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
@@ -72,7 +65,7 @@ export default function Login() {
         theme="light"
         transition:Bounce
       />
-         <div className="threedImage">
+      <div className="threedImage">
         <img src={threeD} alt="d" />
       </div>
       <div className="loader_anime">
