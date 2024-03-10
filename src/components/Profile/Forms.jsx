@@ -3,7 +3,7 @@ import "./Form.scss";
 import user from "../../assets/Social Medias/user1.gif";
 import background from "../../assets/banner.jpg";
 import upload from "../../assets/Social Medias/addImage.gif";
-import { useParams } from "react-router-dom";
+
 import f from "../../assets/Social Medias/f.gif";
 import linkedin from "../../assets/Social Medias/linkedin.gif";
 import whatsup from "../../assets/Social Medias/whatsup.gif";
@@ -884,12 +884,12 @@ let Forms = ({
                     name="bannerImage"
               
                   />
-                  <img
+                  {/* <img
                     src={upload}
                     alt="upload"
                     className="upload"
                     name="bannerImage"
-                  />
+                  /> */}
                 </label>
 
                 <input
@@ -911,12 +911,12 @@ let Forms = ({
                     name="logo"
                     className="logo"
                   />
-                  <img
+                  {/* <img
                     src={upload}
                     alt="upload"
                     className="upload_logo"
                     name="logo"
-                  />
+                  /> */}
                 </label>
 
                 <input
@@ -957,7 +957,7 @@ let Forms = ({
                   name="summary"
                   id=""
                   cols="30"
-                  rows="5"
+                  rows="3"
                   placeholder="Write something about your profession"
                   value={summary}
                   onChange={(e) => setSummary(e.target.value)}
@@ -977,7 +977,7 @@ let Forms = ({
                   <input
                     onClick={handleBasicFormSubmit}
                     type="submit"
-                    value="Upload Basic Details"
+                    value="Upload "
                   />
                 </div>
               )}
@@ -1074,7 +1074,7 @@ let Forms = ({
                   name="address"
                   id=""
                   cols="30"
-                  rows="3"
+                  rows="2"
                   placeholder="Write your location Address"
                   value={Address}
                   onChange={(e) => setAddress(e.target.value)}
@@ -1094,7 +1094,7 @@ let Forms = ({
                   <input
                     onClick={handleContactFormSubmit}
                     type="submit"
-                    value="Upload Contact Details"
+                    value="Upload"
                   />
                 </div>
               )}
@@ -1170,7 +1170,7 @@ let Forms = ({
                   name="serviceSummary"
                   id=""
                   cols="30"
-                  rows="5"
+                  rows="3"
                   placeholder="Write something about this service"
                   value={serviceSummary}
                   onChange={(e) => setServiceSummary(e.target.value)}
@@ -1190,7 +1190,7 @@ let Forms = ({
                   <input
                     onClick={handleServiceFormSubmit}
                     type="submit"
-                    value="Upload Service"
+                    value="Upload "
                   />
                 </div>
               )}
@@ -1276,7 +1276,7 @@ let Forms = ({
                   name="productSummary"
                   id=""
                   cols="30"
-                  rows="5"
+                  rows="3"
                   placeholder="Write something about this Product"
                   value={productSummary}
                   onChange={(e) => setProductSummary(e.target.value)}
@@ -1296,7 +1296,7 @@ let Forms = ({
                   <input
                     onClick={handleProductFormSubmit}
                     type="submit"
-                    value="Upload Product"
+                    value="Upload"
                   />
                 </div>
               )}
@@ -1503,7 +1503,7 @@ let Forms = ({
                   <input
                     onClick={handleSocialMediaFormSubmit}
                     type="submit"
-                    value="Upload Social Media's"
+                    value="Upload"
                   />
                 </div>
               )}
@@ -1590,7 +1590,7 @@ let Forms = ({
                   name="clientSummary"
                   id=""
                   cols="30"
-                  rows="5"
+                  rows="3"
                   placeholder="Paste out client feedback details"
                   value={clientFeedback}
                   onChange={(e) => setClientFeedback(e.target.value)}
@@ -1610,7 +1610,7 @@ let Forms = ({
                   <input
                     onClick={handleTestimonialFormSubmit}
                     type="submit"
-                    value="Upload Testimonial"
+                    value="Upload"
                   />
                 </div>
               )}
