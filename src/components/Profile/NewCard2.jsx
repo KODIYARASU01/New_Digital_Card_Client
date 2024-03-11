@@ -1,8 +1,8 @@
 import React from "react";
 import "./NewCard2.scss";
 import banner from "../../assets/Background/12.jpg";
-import avatar from "../../assets/avatar_2.jpeg";
-import logo from "../../assets/avatar_2.jpeg";
+import avatar from "../../assets/avatar_2.jpg";
+import logo from "../../assets/avatar_2.jpg";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import frontEnd from "../../assets/service/f1.svg";

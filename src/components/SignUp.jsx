@@ -6,7 +6,7 @@ import axios from "axios";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { convertToBase64 } from "./helper/convert";
-import avatar from "../assets/avatar_2.jpeg";
+import avatar from "../assets/avatar_2.jpg";
 import OAUTH from "./OAUTH";
 const SignUp = () => {
   let navigate = useNavigate();
