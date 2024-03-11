@@ -360,7 +360,6 @@ let Forms = ({
       await axios.post("https://server-px9z.onrender.com/basic_detail", data, {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
         },
       });
       alert("Form Submited Sucessfully");
@@ -874,7 +873,7 @@ let Forms = ({
                   Upload Banner Image
                   <img
                     className="banner"
-                    src={ banner || background}
+                    src={ !banner === undefined ? banner : background}
                     alt=""
                     name="bannerImage"
               
