@@ -30,7 +30,7 @@ const SignUp = () => {
         let data = { userName, email, password, profile };
         setLoader1(true);
         let result = await axios.post(
-          "https://new-digitalcard-server.onrender.com/api/register",
+          "https://server-px9z.onrender.com/api/register",
           data
         );
 

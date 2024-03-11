@@ -72,7 +72,7 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
     let getLoginUserData = () => {
       try {
         axios
-          .get(`https://new-digitalcard-server.onrender.com/login/${id}`)
+          .get(`https://server-px9z.onrender.com/login/${id}`)
           .then((res) => {
             console.log(res);
           })

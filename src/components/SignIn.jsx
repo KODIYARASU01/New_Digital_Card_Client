@@ -29,7 +29,7 @@ const SignIn = ({ userDetail, setUserDetail }) => {
         let data = { email, password };
         setLoader(true);
         let result = await axios
-          .post("https://new-digitalcard-server.onrender.com/api/login", data)
+          .post("https://server-px9z.onrender.com/api/login", data)
           // .then((res) => {
           //   setUserDetail(res.data);
           //   setLoader(false);
