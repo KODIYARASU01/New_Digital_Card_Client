@@ -353,7 +353,7 @@ let Forms = ({
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
-        formData,
+        banner,
         logo,
         fullName,
         profession,
