@@ -502,7 +502,7 @@ let Forms = ({
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Servicedata = {
-        formData,
+        serviceImage,
         serviceTitle,
         serviceSummary,
       };
