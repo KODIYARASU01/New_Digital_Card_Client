@@ -19,7 +19,7 @@ import UserProfile from "./components/Profile/Profile";
 // import DigitalCard2 from "./components/Profile/DigitalCard2";
 // import DigitalCard3 from "./components/Profile/DigitalCard3";
 // import NewCard from "./components/Profile/NewCard";
-// import NewCard2 from "./components/Profile/NewCard2";
+import NewCard2 from "./components/Profile/NewCard2";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import { useState } from "react";
@@ -106,6 +106,7 @@ const App = () => {
             <Profile_details userDetail={userDetail} setUserDetail={setUserDetail} />
           }
         />
+        <Route path="new_card" element={<NewCard2/>}/>
       </Routes>
     </BrowserRouter>
   );

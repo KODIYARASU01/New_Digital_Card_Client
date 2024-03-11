@@ -9,7 +9,7 @@ import linkedin from "../../assets/Social Medias/linkedin.gif";
 import whatsup from "../../assets/Social Medias/whatsup.gif";
 import twiter from "../../assets/Social Medias/twiter.gif";
 import insta from "../../assets/Social Medias/insta.gif";
-import clientProfile from "../../assets/avatar_2.jpeg";
+import clientProfile from "../../assets/avatar_2.jpg";
 import Loader from "../Loader.jsx";
 import {
   convertToBase64Basic,

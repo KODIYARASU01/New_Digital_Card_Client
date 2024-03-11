@@ -5,6 +5,8 @@ import Sidebar from "./Sidebar";
 import Forms from "./Forms";
 import axios from "axios";
 
+import DemoCard from "./VCards/DemoCard";
+
 // import Profile_details from "../Profile_details";
 
 const UserProfile = ({ userDetail, setUserDetail }) => {
@@ -194,6 +196,7 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
           setClientFeedbackDate={setClientFeedbackDate}
           setClientFeedback={setClientFeedback}
         />
+      <DemoCard/>
       </div>
       <div className="profile_details">
         <div className="profile_image">
