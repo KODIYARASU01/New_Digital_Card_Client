@@ -5,8 +5,9 @@ import image from "../assets/login_register/teamWork.svg";
 import axios from "axios";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import OAUTH from './OAUTH.jsx'
-const SignIn = () => {
+import OAUTH from "./OAUTH.jsx";
+
+const SignIn = ({ userDetail, setUserDetail }) => {
   var [loginUserData, setLoginUserData] = useState("");
   let navigate = useNavigate();
   console.log(loginUserData);
@@ -27,11 +28,36 @@ const SignIn = () => {
       } else {
         let data = { email, password };
         setLoader(true);
-        let result = await axios.post("http://localhost:3000/api/login", data);
+        let result = await axios
+          .post("http://localhost:3000/api/login", data)
+          // .then((res) => {
+          //   setUserDetail(res.data);
+          //   setLoader(false);
+          //   toast.success(res.data.message, {
+          //     position: "top-center",
+          //     autoClose: 2000,
+          //     transition: Slide,
+          //   });
+          //   setTimeout(() => {
+          //     navigate("/user_admin");
+          //   }, 2000);
+          // })
+          // .catch((err) => {
+          //   console.log(err);
+          //   toast.error(err.response.data.message, {
+          //     position: "top-center",
+          //     autoClose: 2000,
+          //     transition: Slide,
+          //   });
+          //   setLoader(false);
+          //   setTimeout(() => {
+          //     navigate("/");
+          //   }, 2000);
+          // });
 
         let { token } = result.data;
 
-        console.log(token);
+        setUserDetail(result.data)
         // Store the token in local storage
         localStorage.setItem("token", token);
         toast.success(result.data.message, {
@@ -39,7 +65,7 @@ const SignIn = () => {
           autoClose: 2000,
           transition: Slide,
         });
-        setTimeout(() => {2
+        setTimeout(() => {
           navigate("/user_admin");
         }, 2000);
         setEmail("");
@@ -85,8 +111,8 @@ const SignIn = () => {
                   placeholder="Eg : abc@gmail.com"
                   name="email"
                   id="email"
-                 value={email}
-                 onChange={(e)=>setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <div className="icon">
                   <i className="bx bxs-envelope"></i>
@@ -99,8 +125,8 @@ const SignIn = () => {
                   placeholder="Password"
                   name="password"
                   id="password"
-              value={password}
-              onChange={(e)=>setpassword(e.target.value)}
+                  value={password}
+                  onChange={(e) => setpassword(e.target.value)}
                 />
                 <div className="icon">
                   <i className="bx bxs-lock-open"></i>
@@ -118,7 +144,7 @@ const SignIn = () => {
                     <span className="loader"></span>
                   ) : (
                     <div className="rocket">
-                      <i className="bx bxs-rocket bx-flashing"></i>
+                      <i className='bx bx-log-in bx-flashing' ></i>
                     </div>
                   )}
                 </button>
@@ -127,7 +153,7 @@ const SignIn = () => {
                 <p>or &nbsp;&nbsp;&nbsp; Continue</p>
               </div>
             </form>
-{/* //GOOGLE SIGN IN */}
+            {/* //GOOGLE SIGN IN */}
             <OAUTH />
             <div className="signup_link">
               <p>

@@ -28,7 +28,7 @@
 .signup_container {
   width: 100vw;
   height: 100dvh;
-  background-image: url(../../assets/login_register/27.jpg);
+  background-image: url(../../assets/AddminPannel/rm222batch5-mind-03.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -45,36 +45,45 @@
     width: 80%;
     height: 80%;
     z-index: 600;
-    background: linear-gradient(#ffffff, #ffffff);
+    background-image: url(../../assets/AddminPannel/dr12.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    // background: linear-gradient(#ffffff, #ffffff);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 1rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
 
-    .left_image {
+    .right_image {
       width: 50%;
       height: 100%;
       display: flex;
       flex: 0.5;
-
       // background-color: #5161f3;
+      // background-image: url(../../assets/AddminPannel/imageBack.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      mix-blend-mode: multiply;
       align-items: center;
       justify-content: center;
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-      // background: linear-gradient(#A1C4FD   ,#C2E9FB);
 
       .login {
-        width: 600px;
+        width: 350px;
         object-fit: cover;
         object-position: center;
+        mix-blend-mode: multiply;
 
         @media screen and (max-width: 900px) {
           width: 350px;
+            mix-blend-mode: multiply;
         }
         @media screen and (max-width: 500px) {
           width: 290px;
+          mix-blend-mode: multiply;
+     
         }
       }
       img {
@@ -93,10 +102,12 @@
 
       @media screen and (max-width: 900px) {
         flex: 0.4;
+        background-image: none;
       }
       @media screen and (max-width: 800px) {
         flex: 1;
         width: 100%;
+        background-image: none;
       }
       @media screen and (max-width: 500px) {
         // border-bottom-right-radius: 20%;
@@ -107,6 +118,7 @@
         // background-position: center;
         // background-repeat: no-repeat;
         // background-size: cover;
+        background-image: none;
       }
     }
     .right_image {
@@ -172,6 +184,7 @@
 
         h4 {
           letter-spacing: 1px;
+          color: #000;
         }
         p {
           font-size: 0.8rem;
@@ -190,8 +203,8 @@
 
         .profile {
           position: absolute;
-          top: -16%;
-          left: 45%;
+          top: -15%;
+          left: 55%;
 
           label {
             #profile_image {
@@ -314,14 +327,14 @@
           button {
             position: relative;
             width: 70%;
-            padding: 1.1rem 2rem;
+            padding: 0.7rem 2rem;
             outline: none;
             border: transparent;
             background-color: royalblue;
             color: #fff;
             border-radius: 0.5rem;
             letter-spacing: 1px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -406,7 +419,7 @@
         // transition: all 0.3s ease-in-out;
 
         button {
-          width: 100%;
+          width: 80%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -414,19 +427,24 @@
           cursor: pointer;
           outline: none;
           border: transparent;
-          font-size: 0.8rem;
-          font-weight: 500;
+          font-size: 0.6rem;
+          font-weight: 600;
           letter-spacing: 1px;
-          padding: 1rem 2rem;
-          background-image: linear-gradient(white, white),
-            linear-gradient(to right, rgb(84, 87, 247), rgb(66, 241, 241));
-          background-origin: border-box;
-          background-clip: padding-box, border-box;
-          border: double 1px transparent;
-
+          padding: 10px 2rem;
+          transition: all 0.3s ease-in-out;
+          // background-image: linear-gradient(white, white),
+          //   linear-gradient(to right, rgb(84, 87, 247), rgb(66, 241, 241));
+          // background-origin: border-box;
+          // background-clip: padding-box, border-box;
+          // border: double 1px transparent;
+          background-color: #e1ff3a;
+          border-top-left-radius: 5rem;
+          border-top-right-radius: 5rem;
+          border-bottom-left-radius: 5rem;
+          border-bottom-right-radius: 5rem;
           img {
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
 
             @media screen and (max-width: 500px) {
               width: 25px;
@@ -439,7 +457,10 @@
 
             background-image: linear-gradient(white, white),
               linear-gradient(to right, rgb(125, 253, 200), rgb(240, 126, 160));
-
+            border-top-left-radius: 5rem;
+            border-top-right-radius: 5rem;
+            border-bottom-left-radius: 5rem;
+            border-bottom-right-radius: 5rem;
             background-origin: border-box;
             background-clip: padding-box, border-box;
             transition: all 0.3s ease-in-out;
@@ -486,6 +507,7 @@
       justify-content: flex-start;
       height: auto;
       box-shadow: none;
+      background-image: none;
     }
     @media screen and (max-width: 500px) {
       width: 100%;
@@ -493,13 +515,16 @@
       box-shadow: none;
       padding: 10px 0px;
       border-radius: 0rem;
+      background-image: none;
+      background-color: #fff;
     }
   }
   @media screen and (max-width: 800px) {
     height: auto;
   }
   @media screen and (max-width: 500px) {
-    background-image: url(../../assets/login_register/21.jpg);
+
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

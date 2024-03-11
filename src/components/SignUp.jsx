@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SignUp.scss";
-import signup from "../assets/login_register/codeThinker.svg";
+import signup from "../assets/login_register/registerNew1.svg";
 import axios from "axios";
 import { Slide, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +16,6 @@ const SignUp = () => {
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
   let [loader1, setLoader1] = useState(false);
-  console.log(userName);
   let handleSignUpSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,7 +42,7 @@ const SignUp = () => {
           });
           setLoader1(false);
           setTimeout(() => {
-            navigate("/user_admin");
+            navigate("/");
           }, 2000);
         } else {
           navigate("/signup");
@@ -171,6 +170,7 @@ const SignUp = () => {
           <div className="right_image">
             <img className="login" src={signup} alt="signUp" />
           </div>
+       
         </div>
       </div>
     </>
