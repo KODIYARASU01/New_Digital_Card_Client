@@ -123,7 +123,7 @@ let Forms = ({
     setLoader(true);
     axios
 
-      .get(`https://new-digitalcard-server.onrender.com/basic_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/basic_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -150,7 +150,7 @@ let Forms = ({
     const token = localStorage.getItem("token");
     axios
 
-      .get(`https://new-digitalcard-server.onrender.com/contact_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/contact_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -181,7 +181,7 @@ let Forms = ({
     const token = localStorage.getItem("token");
     axios
 
-      .get(`https://new-digitalcard-server.onrender.com/service_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/service_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -204,7 +204,7 @@ let Forms = ({
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
-      .get(`https://new-digitalcard-server.onrender.com/product_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/product_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -229,7 +229,7 @@ let Forms = ({
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
-      .get(`https://new-digitalcard-server.onrender.com/gallery_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/gallery_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -252,7 +252,7 @@ let Forms = ({
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
-      .get(`https://new-digitalcard-server.onrender.com/socialMedia_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/socialMedia_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -279,7 +279,7 @@ let Forms = ({
     const token = localStorage.getItem("token");
     axios
 
-      .get(`https://new-digitalcard-server.onrender.com/testimonial_detail`, {
+      .get(`https://digital-card-mern-app-server.onrender.com/testimonial_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -360,7 +360,7 @@ let Forms = ({
         summary,
       };
       // Make authenticated request with bearer token
-      await axios.post("https://new-digitalcard-server.onrender.com/basic_detail", data, {
+      await axios.post("https://digital-card-mern-app-server.onrender.com/basic_detail", data, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -394,7 +394,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/basic_detail/${BasicData._id}`, data, {
+        .put(`https://digital-card-mern-app-server.onrender.com/basic_detail/${BasicData._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -434,7 +434,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/contact_detail", Contactdata, {
+        .post("https://digital-card-mern-app-server.onrender.com/contact_detail", Contactdata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -472,7 +472,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/contact_detail/${ContactData._id}`, data, {
+        .put(`https://digital-card-mern-app-server.onrender.com/contact_detail/${ContactData._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -508,7 +508,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/service_detail", Servicedata, {
+        .post("https://digital-card-mern-app-server.onrender.com/service_detail", Servicedata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -542,7 +542,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/service_detail/${ServiceData._id}`, data, {
+        .put(`https://digital-card-mern-app-server.onrender.com/service_detail/${ServiceData._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -576,7 +576,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/product_detail", Productdata, {
+        .post("https://digital-card-mern-app-server.onrender.com/product_detail", Productdata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -611,7 +611,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/product_detail/${ProductData._id}`, data, {
+        .put(`https://digital-card-mern-app-server.onrender.com/product_detail/${ProductData._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -643,7 +643,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/gallery_detail", Gallerydata, {
+        .post("https://digital-card-mern-app-server.onrender.com/gallery_detail", Gallerydata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -677,7 +677,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .put(`https://new-digitalcard-server.onrender.com/gallery_detail/${GalleryData._id}`, data, {
+        .put(`https://digital-card-mern-app-server.onrender.com/gallery_detail/${GalleryData._id}`, data, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -714,7 +714,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/socialMedia_detail", SocialMediadata, {
+        .post("https://digital-card-mern-app-server.onrender.com/socialMedia_detail", SocialMediadata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -751,7 +751,7 @@ let Forms = ({
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://new-digitalcard-server.onrender.com/socialMedia_detail/${SocialMediaData._id}`,
+          `https://digital-card-mern-app-server.onrender.com/socialMedia_detail/${SocialMediaData._id}`,
           data,
           {
             headers: {
@@ -788,7 +788,7 @@ let Forms = ({
       };
       // Make authenticated request with bearer token
       await axios
-        .post("https://new-digitalcard-server.onrender.com/testimonial_detail", SocialMediadata, {
+        .post("https://digital-card-mern-app-server.onrender.com/testimonial_detail", SocialMediadata, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -823,7 +823,7 @@ let Forms = ({
       // Make authenticated request with bearer token
       await axios
         .put(
-          `https://new-digitalcard-server.onrender.com/testimonial_detail/${TestimonialData._id}`,
+          `https://digital-card-mern-app-server.onrender.com/testimonial_detail/${TestimonialData._id}`,
           data,
           {
             headers: {
