@@ -23,8 +23,7 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
   let [testimonialForm, setTestimonialForm] = useState(false);
 
   //Basic Detail form states:
-  let [banner, setBanner] = useState("");
-  let bannerRef = useRef(null);
+  let [banner, setBanner] = useState();
   let [logo, setLogo] = useState();
   let [fullName, setFullName] = useState();
   let [profession, setProfession] = useState();
@@ -129,7 +128,7 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
           setSocialMediaForm={setSocialMediaForm}
           setTestimonialForm={setTestimonialForm}
           banner={banner}
-          bannerRef={bannerRef}
+     
           logo={logo}
           fullName={fullName}
           profession={profession}

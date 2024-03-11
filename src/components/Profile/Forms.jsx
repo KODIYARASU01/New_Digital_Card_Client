@@ -32,7 +32,7 @@ let Forms = ({
   testimonialForm,
   //Basic
   banner,
-  // bannerRef,
+
   logo,
   fullName,
   profession,
@@ -112,7 +112,8 @@ let Forms = ({
   let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
   let [TestimonialData, setTestimonialData] = useState([]);
   let [TestimonialEdit, setTestimonialEdit] = useState(false);
-  let bannerRef = useRef();
+
+  console.log(banner)
   let url = import.meta.env.SERVER_LISTENING;
 
   let [loader, setLoader] = useState(false);
@@ -346,10 +347,6 @@ let Forms = ({
   async function handleBasicFormSubmit(e) {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("banner", banner);
-      setLoader(true);
-      console.log(formData)
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -496,9 +493,7 @@ let Forms = ({
   async function handleServiceFormSubmit(e) {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("serviceImage", serviceImage);
-      setLoader(true);
+
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Servicedata = {
@@ -893,7 +888,6 @@ let Forms = ({
                 </label>
 
                 <input
-                  ref={bannerRef}
                   onChange={onUploadBannerImage}
                   type="file"
                   name="bannerImage"
