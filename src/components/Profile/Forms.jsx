@@ -20,6 +20,8 @@ import {
   convertTestimonialImageToBase64,
 } from "../helper/convert";
 import axios from "axios";
+import { Slide, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 let Forms = ({
   slideClose,
   setSlideShow,
@@ -97,39 +99,67 @@ let Forms = ({
   setClientName,
   setClientFeedbackDate,
   setClientFeedback,
+  //Fetch form data from database:
+  BasicData,
+  setBasicData,
+  ContactData,
+  setContactData,
+  ServiceData,
+  setServiceData,
+  ProductData,
+  setProductData,
+  GalleryData,
+  setGalleryData,
+  SocialMediaData,
+  setSocialMediaData,
+  TestimonialData,
+  setTestimonialData,
 }) => {
-  let [BasicData, setBasicData] = useState([]);
+  // let [BasicData, setBasicData] = useState([]);
   let [BasicEdit, setBasicEdit] = useState(false);
-  let [ContactData, setContactData] = useState([]);
+  // let [ContactData, setContactData] = useState([]);
   let [ContactEdit, setContactEdit] = useState(false);
-  let [ServiceData, setServiceData] = useState([]);
+  // let [ServiceData, setServiceData] = useState([]);
   let [ServiceEdit, setServiceEdit] = useState(false);
-  let [ProductData, setProductData] = useState([]);
+  // let [ProductData, setProductData] = useState([]);
   let [ProductEdit, setProductEdit] = useState(false);
-  let [GalleryData, setGalleryData] = useState([]);
+  // let [GalleryData, setGalleryData] = useState([]);
   let [GalleryEdit, setGalleryEdit] = useState(false);
-  let [SocialMediaData, setSocialMediaData] = useState([]);
+  // let [SocialMediaData, setSocialMediaData] = useState([]);
   let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
-  let [TestimonialData, setTestimonialData] = useState([]);
+  // let [TestimonialData, setTestimonialData] = useState([]);
   let [TestimonialEdit, setTestimonialEdit] = useState(false);
 
-  console.log(banner)
   let url = import.meta.env.SERVER_LISTENING;
 
-  let [loader, setLoader] = useState(false);
+  let [loader2, setLoader2] = useState(false);
   //Fetch while cliking edit button:
   function handleEdit1() {
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
-    setLoader(true);
+    setLoader2(true);
     axios
-
       .get(`https://server-px9z.onrender.com/basic_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
+        if (res.data.result.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.result.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setBanner(res.data.result[0].banner);
         setLogo(res.data.result[0].logo);
         setFullName(res.data.result[0].fullName);
@@ -137,16 +167,20 @@ let Forms = ({
         setSummary(res.data.result[0].summary);
         setBasicData(res.data.result[0]);
         setBasicEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
   //Fetch while cliking Contact Button:
   function handleEdit2() {
-    setLoader(true);
+    setLoader2(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -157,7 +191,22 @@ let Forms = ({
         },
       })
       .then((res) => {
-        console.log(res.data.getContactDetail[0]);
+        if (res.data.getContactDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getContactDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
         setEmail(res.data.getContactDetail[0].Email);
         setAlternateEmail(res.data.getContactDetail[0].AlternateEmail);
         setMobileNumber(res.data.getContactDetail[0].MobileNumber);
@@ -168,40 +217,64 @@ let Forms = ({
         setAddress(res.data.getContactDetail[0].Address);
         setContactData(res.data.getContactDetail[0]);
         setContactEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+
+        setLoader2(false);
       });
   }
   //Fetch while cliking Service Button:
   function handleEdit3() {
-    setLoader(false);
+    setLoader2(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
-
       .get(`https://server-px9z.onrender.com/service_detail`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
+        if (res.data.getServiceDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getServiceDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setServiceImage(res.data.getServiceDetail[0].serviceImage);
         setServiceTitle(res.data.getServiceDetail[0].serviceTitle);
         setServiceSummary(res.data.getServiceDetail[0].serviceSummary);
         setServiceData(res.data.getServiceDetail[0]);
         setServiceEdit(true);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
   //Fetch while cliking Product Button:
   function handleEdit4() {
-    setLoader(true);
+    setLoader2(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -211,22 +284,41 @@ let Forms = ({
         },
       })
       .then((res) => {
+        if (res.data.getProductDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getProductDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setProductImage(res.data.getProductDetail[0].productImage);
         setProductTitle(res.data.getProductDetail[0].productTitle);
         setProductReleaseDate(res.data.getProductDetail[0].productReleaseDate);
         setProductSummary(res.data.getProductDetail[0].productSummary);
         setProductData(res.data.getProductDetail[0]);
         setProductEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
   //Fetch while cliking Gallery Button:
   function handleEdit5() {
-    setLoader(true);
+    setLoader2(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -236,20 +328,39 @@ let Forms = ({
         },
       })
       .then((res) => {
+        if (res.data.getGalleryDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getGalleryDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setGalleryImage(res.data.getGalleryDetail[0].galleryImage);
         setVideoURL(res.data.getGalleryDetail[0].videoURL);
         setGalleryData(res.data.getGalleryDetail[0]);
         setGalleryEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
   //Fetch while cliking SocialMedia Button:
   function handleEdit6() {
-    setLoader(false);
+    setLoader2(false);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -259,6 +370,21 @@ let Forms = ({
         },
       })
       .then((res) => {
+        if (res.data.getSocialMediaDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getSocialMediaDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setFacebook(res.data.getSocialMediaDetail[0].Facebook);
         setLinkedIn(res.data.getSocialMediaDetail[0].LinkedIn);
         setWhatsUp(res.data.getSocialMediaDetail[0].WhatsUp);
@@ -266,16 +392,20 @@ let Forms = ({
         setTwiter(res.data.getSocialMediaDetail[0].Twiter);
         setSocialMediaData(res.data.getSocialMediaDetail[0]);
         setSocialMediaEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
   //Fetch while cliking Product Button:
   function handleEdit7() {
-    setLoader(true);
+    setLoader2(true);
     // Retrieve token from local storage or wherever it's stored
     const token = localStorage.getItem("token");
     axios
@@ -286,6 +416,21 @@ let Forms = ({
         },
       })
       .then((res) => {
+        if (res.data.getTestimonialDetail.length > 0) {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
+
+        if (res.data.getTestimonialDetail.length <= 0) {
+          toast.error("Data not found", {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+        }
         setClientName(res.data.getTestimonialDetail[0].clientName);
         setClientImage(res.data.getTestimonialDetail[0].clientImage);
         setClientFeedbackDate(
@@ -294,34 +439,34 @@ let Forms = ({
         setClientFeedback(res.data.getTestimonialDetail[0].clientFeedback);
         setTestimonialData(res.data.getTestimonialDetail[0]);
         setTestimonialEdit(true);
-        setLoader(false);
+        setLoader2(false);
       })
       .catch((err) => {
-        alert(err.message);
-        setLoader(false);
+        toast.error(err, {
+          position: "top-center",
+          autoClose: 2000,
+          transition: Slide,
+        });
+        setLoader2(false);
       });
   }
-
   const onUploadBannerImage = async (e) => {
     let base64 = await convertBannerImageToBase64(e.target.files[0]);
 
     setBanner(base64);
   };
-
   //Formik does not support file upload so we could create handler :
   const onUpload = async (e) => {
     let base64 = await convertToBase64Basic(e.target.files[0]);
 
     setLogo(base64);
   };
-
   //Formik does not support file upload so we could create handler :
   const onUploadServiceImage = async (e) => {
     let base64 = await convertServiceImageToBase64(e.target.files[0]);
 
     setServiceImage(base64);
   };
-
   // const onUploadServiceImage=(e)=>{
   //   setServiceImage(e.target.files[0])
   // };
@@ -356,29 +501,47 @@ let Forms = ({
         profession,
         summary,
       };
+      setLoader2(true);
       // Make authenticated request with bearer token
-      await axios.post("https://server-px9z.onrender.com/basic_detail", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert("Form Submited Sucessfully");
+      await axios
+        .post("https://server-px9z.onrender.com/basic_detail", data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((responce) => {
+          toast.success(responce.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
+          setFullName("");
+          setProfession("");
+          setSummary("");
+          setBanner(null);
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
+        });
 
-      setFullName("");
-      setProfession("");
-      setSummary("");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
       alert("Something Error");
-      setLoader(false);
+      setLoader2(false);
     }
   }
   //Home form Edit:
   async function handleBasicFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -396,28 +559,41 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-
       setFullName("");
       setProfession("");
       setSummary("");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Contact form submit:
   async function handleContactFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Contactdata = {
@@ -436,26 +612,32 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
-
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
-          setLoader(false);
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
     } catch (error) {
       // Handle errors
       alert("Something Error" + error.message);
-      setLoader(false);
+      setLoader2(false);
     }
   }
   //Contact form Edit:
   async function handleContactFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -474,25 +656,37 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
-          setLoader(false);
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Service form submit:
   async function handleServiceFormSubmit(e) {
     e.preventDefault();
     try {
-
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Servicedata = {
@@ -508,25 +702,37 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
-          setLoader(false);
+          toast.success(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error" + error.message);
-      setLoader(false);
+      toast.success(error.responce.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Service form Edit:
   async function handleServiceFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -542,24 +748,37 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
+          toast.success(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+
+      setLoader2(false);
     } catch (error) {
-      // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Product form submit:
   async function handleProductFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Productdata = {
@@ -576,25 +795,36 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
-          setLoader(false);
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
     } catch (error) {
       // Handle errors
-      alert("Something Error" + error.message);
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Product form Edit:
   async function handleProductEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -611,24 +841,38 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+
+      setLoader2(false);
     }
   }
   //Gallery form submit:
   async function handleGalleryFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let Gallerydata = {
@@ -643,26 +887,39 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
-          setLoader(false);
+          toast.success(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error" + error.message);
-      setLoader(false);
+      toast.error(error.respose.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+
+      setLoader2(false);
     }
   }
   //Gallery form Edit:
   async function handleGalleryEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -677,26 +934,38 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res.data);
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
-          setLoader(false);
+          toast.success(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.success(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //SocialMedia form submit:
   async function handleSocialMediaFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(false);
+      setLoader2(false);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let SocialMediadata = {
@@ -714,25 +983,37 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
-          setLoader(false);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error" + error.message);
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //SocialMedia form Edit:
   async function handleSocialMediaFormEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -754,24 +1035,36 @@ let Forms = ({
           }
         )
         .then((res) => {
-          console.log(res.data);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((err) => {
-          alert("Something error" + err.message);
+          toast.success(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
-      // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Testimonial form submit:
   async function handleTestimonialFormSubmit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let SocialMediadata = {
@@ -788,24 +1081,37 @@ let Forms = ({
           },
         })
         .then((res) => {
-          console.log(res);
-          alert("Form Submited Sucessfully");
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         })
         .catch((error) => {
-          alert("Data posting error" + error.message);
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      setLoader(false);
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error" + error.message);
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   //Testimonial form Edit:
   async function handleTestimonialEdit(e) {
     e.preventDefault();
     try {
-      setLoader(true);
+      setLoader2(true);
       // Retrieve token from local storage or wherever it's stored
       const token = localStorage.getItem("token");
       let data = {
@@ -826,18 +1132,31 @@ let Forms = ({
           }
         )
         .then((res) => {
-          console.log(res.data);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2000,
+            transition: Slide,
+          });
+          setLoader2(false);
         });
-      setLoader(false).catch((err) => {
-        alert("Something error" + err.message);
-        setLoader(false);
-      });
-      alert("Form Updated Sucessfully");
-      setLoader(false);
+
+      setLoader2(false);
     } catch (error) {
       // Handle errors
-      alert("Something Error");
-      setLoader(false);
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2000,
+        transition: Slide,
+      });
+      setLoader2(false);
     }
   }
   return (
@@ -846,7 +1165,14 @@ let Forms = ({
         className="forms_container"
         id={slideClose ? "Formclose" : "Formopen"}
       >
-        <div className="loader_container">{loader ? <Loader /> : ""}</div>
+        <ToastContainer
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+        <div className="loader_container">{loader2 ? <Loader /> : ""}</div>
         {/* //Form 1 Basic Details */}
         {basicForm === true ? (
           <div
@@ -873,10 +1199,9 @@ let Forms = ({
                   Upload Banner Image
                   <img
                     className="banner"
-                    src={ !banner === undefined ? banner : background}
+                    src={!banner === undefined ? banner : background}
                     alt=""
                     name="bannerImage"
-              
                   />
                   {/* <img
                     src={upload}
@@ -898,7 +1223,6 @@ let Forms = ({
                 <label htmlFor="logo">
                   Upload Logo Image
                   <img
-                
                     src={logo !== undefined ? logo : clientProfile}
                     alt=""
                     name="logo"
@@ -913,7 +1237,7 @@ let Forms = ({
                 </label>
 
                 <input
-               onChange={onUpload}
+                  onChange={onUpload}
                   value={banner}
                   type="file"
                   name="logo"
@@ -1123,7 +1447,7 @@ let Forms = ({
                   Upload Service Image
                   <img
                     className="serviceImage"
-                    src={serviceImage != ''? serviceImage : background}
+                    src={serviceImage != "" ? serviceImage : background}
                     alt=""
                     name="serviceImage"
                     onChange={onUploadServiceImage}

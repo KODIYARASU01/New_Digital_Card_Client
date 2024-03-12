@@ -68,7 +68,22 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
   let [clientName, setClientName] = useState();
   let [clientFeedbackDate, setClientFeedbackDate] = useState();
   let [clientFeedback, setClientFeedback] = useState();
+  //Fetch data from mongoDb:
 
+  let [BasicData, setBasicData] = useState([]);
+  // let [BasicEdit, setBasicEdit] = useState(false);
+  let [ContactData, setContactData] = useState([]);
+  // let [ContactEdit, setContactEdit] = useState(false);
+  let [ServiceData, setServiceData] = useState([]);
+  // let [ServiceEdit, setServiceEdit] = useState(false);
+  let [ProductData, setProductData] = useState([]);
+  // let [ProductEdit, setProductEdit] = useState(false);
+  let [GalleryData, setGalleryData] = useState([]);
+  // let [GalleryEdit, setGalleryEdit] = useState(false);
+  let [SocialMediaData, setSocialMediaData] = useState([]);
+  // let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
+  let [TestimonialData, setTestimonialData] = useState([]);
+  // let [TestimonialEdit, setTestimonialEdit] = useState(false);
   useEffect(() => {
     let getLoginUserData = () => {
       try {
@@ -128,7 +143,6 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
           setSocialMediaForm={setSocialMediaForm}
           setTestimonialForm={setTestimonialForm}
           banner={banner}
-     
           logo={logo}
           fullName={fullName}
           profession={profession}
@@ -194,8 +208,38 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
           setClientName={setClientName}
           setClientFeedbackDate={setClientFeedbackDate}
           setClientFeedback={setClientFeedback}
+          //Fetch data from mongoDb:
+          BasicData={BasicData}
+          setBasicData={setBasicData}
+          ContactData={ContactData}
+          setContactData={setContactData}
+          ServiceData={ServiceData}
+          setServiceData={setServiceData}
+          ProductData={setProductData}
+          setProductData={setProductData}
+          GalleryData={GalleryData}
+          setGalleryData={setGalleryData}
+          SocialMediaData={SocialMediaData}
+          setSocialMediaData={setSocialMediaData}
+          TestimonialData={TestimonialData}
+          setTestimonialData={setTestimonialData}
         />
-      <DemoCard/>
+        <DemoCard
+          BasicData={BasicData}
+          setBasicData={setBasicData}
+          ContactData={ContactData}
+          setContactData={setContactData}
+          ServiceData={ServiceData}
+          setServiceData={setServiceData}
+          ProductData={ProductData}
+          setProductData={setProductData}
+          GalleryData={GalleryData}
+          setGalleryData={setGalleryData}
+          SocialMediaData={SocialMediaData}
+          setSocialMediaData={setSocialMediaData}
+          TestimonialData={TestimonialData}
+          setTestimonialData={setTestimonialData}
+        />
       </div>
       <div className="profile_details">
         <div className="profile_image">
