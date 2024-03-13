@@ -100,6 +100,8 @@ let Forms = ({
   setClientFeedbackDate,
   setClientFeedback,
   //Fetch form data from database:
+  ID,
+  setID,
   BasicData,
   setBasicData,
   ContactData,
@@ -160,6 +162,7 @@ let Forms = ({
             transition: Slide,
           });
         }
+        setID(res.data.result[0]._id)
         setBanner(res.data.result[0].banner);
         setLogo(res.data.result[0].logo);
         setFullName(res.data.result[0].fullName);
@@ -515,6 +518,7 @@ let Forms = ({
             autoClose: 2000,
             transition: Slide,
           });
+          setBasicData(responce.data.result[0]);
           setLoader2(false);
           setFullName("");
           setProfession("");

@@ -4,13 +4,19 @@ import { useParams } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Forms from "./Forms";
 import axios from "axios";
-
+import { useSelector } from "react-redux";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import DemoCard from "./VCards/DemoCard";
 
 // import Profile_details from "../Profile_details";
 
 const UserProfile = ({ userDetail, setUserDetail }) => {
-  console.log(userDetail);
+  const { currentUser,loading,error } = useSelector((state) => state.user);
   let [show, setShow] = useState(false);
   let { id } = useParams();
   let [slideClose, setSlideShow] = useState(false);
@@ -70,9 +76,12 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
   let [clientFeedback, setClientFeedback] = useState();
   //Fetch data from mongoDb:
 
+  let[ID,setID]=useState([]);
+
   let [BasicData, setBasicData] = useState([]);
   // let [BasicEdit, setBasicEdit] = useState(false);
   let [ContactData, setContactData] = useState([]);
+
   // let [ContactEdit, setContactEdit] = useState(false);
   let [ServiceData, setServiceData] = useState([]);
   // let [ServiceEdit, setServiceEdit] = useState(false);
@@ -84,24 +93,8 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
   // let [SocialMediaEdit, setSocialMediaEdit] = useState(false);
   let [TestimonialData, setTestimonialData] = useState([]);
   // let [TestimonialEdit, setTestimonialEdit] = useState(false);
-  useEffect(() => {
-    let getLoginUserData = () => {
-      try {
-        axios
-          .get(`https://server-px9z.onrender.com/login/${id}`)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      } catch (err) {
-        alert("Login data not found");
-      }
-    };
 
-    getLoginUserData();
-  }, []);
+
   return (
     <>
       <div className="profile_container">
@@ -209,6 +202,8 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
           setClientFeedbackDate={setClientFeedbackDate}
           setClientFeedback={setClientFeedback}
           //Fetch data from mongoDb:
+          ID={ID}
+          setID={setID}
           BasicData={BasicData}
           setBasicData={setBasicData}
           ContactData={ContactData}
@@ -245,7 +240,7 @@ const UserProfile = ({ userDetail, setUserDetail }) => {
         <div className="profile_image">
           <img
             onClick={() => setShow(!show)}
-            src={userDetail.profile}
+            src={currentUser.profile}
             alt="profile"
           />
         </div>
